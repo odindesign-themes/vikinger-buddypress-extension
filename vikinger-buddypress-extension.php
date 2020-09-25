@@ -3,7 +3,7 @@
  * Plugin Name: Vikinger - Buddypress Extension
  * Plugin URI: http://odindesign-themes.com/
  * Description: Vikinger functionality extension to Buddypress.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Odin Design Themes
  * Author URI: https://themeforest.net/user/odin_design
  * License: https://themeforest.net/licenses/
