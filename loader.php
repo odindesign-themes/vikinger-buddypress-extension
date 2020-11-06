@@ -27,7 +27,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
 
   ob_start();
   ?>
-  <?php printf(esc_html('Hi, %s!', 'vikinger'), $logged_user['name']); ?><img src="<?php echo esc_url($logged_user['avatar_url']); ?>" srcset="<?php echo esc_url($logged_user['avatar_url']); ?> 2x" class="avatar avatar-26 photo" height="26" width="26">
+  <?php printf(esc_html('Hi, %s!', 'vikinger-buddypress-extension'), $logged_user['name']); ?><img src="<?php echo esc_url($logged_user['avatar_url']); ?>" srcset="<?php echo esc_url($logged_user['avatar_url']); ?> 2x" class="avatar avatar-26 photo" height="26" width="26">
   <?php
   $account_info_html = ob_get_clean();
 
@@ -57,7 +57,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   // User info menu link
   $wp_admin_bar->add_menu([
     'id'      => 'edit-profile',
-    'title'   => _x('Edit My Profile', '(Admin Bar) Quick Access Settings Page Link', 'vikinger'),
+    'title'   => _x('Edit My Profile', '(Admin Bar) Quick Access Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings')
   ]);
 
@@ -65,7 +65,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'my-account-buddypress',
     'id'      => 'vikinger-profile',
-    'title'   => _x('Profile', '(Admin Bar) Profile Page Link', 'vikinger'),
+    'title'   => _x('Profile', '(Admin Bar) Profile Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'activity')
   ]);
 
@@ -73,7 +73,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-profile',
     'id'      => 'vikinger-profile-about',
-    'title'   => _x('About', '(Admin Bar) Profile Activity Page Link', 'vikinger'),
+    'title'   => _x('About', '(Admin Bar) Profile Activity Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'about')
   ]);
 
@@ -81,7 +81,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-profile',
     'id'      => 'vikinger-profile-timeline',
-    'title'   => _x('Timeline', '(Admin Bar) Profile Timeline Page Link', 'vikinger'),
+    'title'   => _x('Timeline', '(Admin Bar) Profile Timeline Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'activity')
   ]);
 
@@ -91,7 +91,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-profile',
       'id'      => 'vikinger-profile-friends',
-      'title'   => _x('Friends', '(Admin Bar) Profile Friends Page Link', 'vikinger'),
+      'title'   => _x('Friends', '(Admin Bar) Profile Friends Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'friends')
     ]);
   }
@@ -102,7 +102,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-profile',
       'id'      => 'vikinger-profile-groups',
-      'title'   => _x('Groups', '(Admin Bar) Profile Groups Page Link', 'vikinger'),
+      'title'   => _x('Groups', '(Admin Bar) Profile Groups Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'groups')
     ]);
   }
@@ -111,7 +111,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-profile',
     'id'      => 'vikinger-profile-blog',
-    'title'   => _x('Blog', '(Admin Bar) Profile Blog Page Link', 'vikinger'),
+    'title'   => _x('Blog', '(Admin Bar) Profile Blog Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'posts')
   ]);
 
@@ -121,7 +121,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-profile',
       'id'      => 'vikinger-profile-photos',
-      'title'   => _x('Photos', '(Admin Bar) Profile Photos Page Link', 'vikinger'),
+      'title'   => _x('Photos', '(Admin Bar) Profile Photos Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'photos')
     ]);
   }
@@ -132,7 +132,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-profile',
       'id'      => 'vikinger-profile-credits',
-      'title'   => _x('Credits', '(Admin Bar) Profile Credits Page Link', 'vikinger'),
+      'title'   => _x('Credits', '(Admin Bar) Profile Credits Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'credits')
     ]);
 
@@ -140,7 +140,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-profile',
       'id'      => 'vikinger-profile-badges',
-      'title'   => _x('Badges', '(Admin Bar) Profile Badges Page Link', 'vikinger'),
+      'title'   => _x('Badges', '(Admin Bar) Profile Badges Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'badges')
     ]);
 
@@ -148,7 +148,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-profile',
       'id'      => 'vikinger-profile-quests',
-      'title'   => _x('Quests', '(Admin Bar) Profile Quests Page Link', 'vikinger'),
+      'title'   => _x('Quests', '(Admin Bar) Profile Quests Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'quests')
     ]);
 
@@ -156,7 +156,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-profile',
       'id'      => 'vikinger-profile-ranks',
-      'title'   => _x('Rank', '(Admin Bar) Profile Ranks Page Link', 'vikinger'),
+      'title'   => _x('Rank', '(Admin Bar) Profile Ranks Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'ranks')
     ]);
   }
@@ -165,7 +165,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'my-account-buddypress',
     'id'      => 'vikinger-settings',
-    'title'   => _x('Settings', '(Admin Bar) Settings Page Link', 'vikinger'),
+    'title'   => _x('Settings', '(Admin Bar) Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings')
   ]);
 
@@ -173,7 +173,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-settings',
     'id'      => 'vikinger-settings-myprofile',
-    'title'   => _x('Profile', '(Admin Bar) Profile Settings Page Link', 'vikinger'),
+    'title'   => _x('Profile', '(Admin Bar) Profile Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings')
   ]);
 
@@ -181,7 +181,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-settings-myprofile',
     'id'      => 'vikinger-settings-profile-info',
-    'title'   => _x('Profile Info', '(Admin Bar) Profile Info Settings Page Link', 'vikinger'),
+    'title'   => _x('Profile Info', '(Admin Bar) Profile Info Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings')
   ]);
 
@@ -189,7 +189,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-settings-myprofile',
     'id'      => 'vikinger-settings-social',
-    'title'   => _x('Social', '(Admin Bar) Social Settings Page Link', 'vikinger'),
+    'title'   => _x('Social', '(Admin Bar) Social Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings/social')
   ]);
 
@@ -197,7 +197,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-settings-myprofile',
     'id'      => 'vikinger-settings-notifications',
-    'title'   => _x('Notifications', '(Admin Bar) Notification Settings Page Link', 'vikinger'),
+    'title'   => _x('Notifications', '(Admin Bar) Notification Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings/notifications')
   ]);
 
@@ -207,7 +207,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-settings-myprofile',
       'id'      => 'vikinger-settings-messages',
-      'title'   => _x('Messages', '(Admin Bar) Message Settings Page Link', 'vikinger'),
+      'title'   => _x('Messages', '(Admin Bar) Message Settings Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'settings/messages')
     ]);
   }
@@ -218,7 +218,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-settings-myprofile',
       'id'      => 'vikinger-settings-friend-requests',
-      'title'   => _x('Friend Requests', '(Admin Bar) Friend Requests Settings Page Link', 'vikinger'),
+      'title'   => _x('Friend Requests', '(Admin Bar) Friend Requests Settings Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'settings/friend-requests')
     ]);
   }
@@ -227,7 +227,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-settings',
     'id'      => 'vikinger-settings-account',
-    'title'   => _x('Account', '(Admin Bar) Account Settings Page Link', 'vikinger'),
+    'title'   => _x('Account', '(Admin Bar) Account Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings/account')
   ]);
 
@@ -235,7 +235,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-settings-account',
     'id'      => 'vikinger-settings-account-info',
-    'title'   => _x('Account Info', '(Admin Bar) Account Info Settings Page Link', 'vikinger'),
+    'title'   => _x('Account Info', '(Admin Bar) Account Info Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings/account')
   ]);
 
@@ -243,7 +243,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $wp_admin_bar->add_menu([
     'parent'  => 'vikinger-settings-account',
     'id'      => 'vikinger-settings-account-password',
-    'title'   => _x('Change Password', '(Admin Bar) Change Password Settings Page Link', 'vikinger'),
+    'title'   => _x('Change Password', '(Admin Bar) Change Password Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings/password')
   ]);
 
@@ -253,7 +253,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-settings',
       'id'      => 'vikinger-settings-groups',
-      'title'   => _x('Groups', '(Admin Bar) Groups Settings Page Link', 'vikinger'),
+      'title'   => _x('Groups', '(Admin Bar) Groups Settings Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'settings/manage-groups')
     ]);
 
@@ -261,7 +261,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-settings-groups',
       'id'      => 'vikinger-settings-manage-groups',
-      'title'   => _x('Manage Groups', '(Admin Bar) Manage Groups Settings Page Link', 'vikinger'),
+      'title'   => _x('Manage Groups', '(Admin Bar) Manage Groups Settings Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'settings/manage-groups')
     ]);
 
@@ -269,7 +269,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-settings-groups',
       'id'      => 'vikinger-settings-send-group-invitations',
-      'title'   => _x('Send Group Invitations', '(Admin Bar) Send Group Invitations Settings Page Link', 'vikinger'),
+      'title'   => _x('Send Group Invitations', '(Admin Bar) Send Group Invitations Settings Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'settings/send-group-invitations')
     ]);
 
@@ -277,7 +277,7 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-settings-groups',
       'id'      => 'vikinger-settings-received-group-invitations',
-      'title'   => _x('Received Group Invitations', '(Admin Bar) Received Group Invitations Settings Page Link', 'vikinger'),
+      'title'   => _x('Received Group Invitations', '(Admin Bar) Received Group Invitations Settings Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'settings/received-group-invitations')
     ]);
   }
@@ -333,7 +333,7 @@ if (bp_is_active('groups')) {
     function __construct() {
       $args = [
         'slug' => 'photos',
-        'name' => 'Photos',
+        'name' => 'Photos'
       ];
 
       parent::init( $args );
