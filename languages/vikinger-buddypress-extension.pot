@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Vikinger - BuddyPress Extension\n"
-"POT-Creation-Date: 2020-11-06 11:10-0300\n"
+"POT-Creation-Date: 2020-11-25 16:52-0300\n"
 "PO-Revision-Date: 2020-11-06 11:04-0300\n"
 "Last-Translator: \n"
 "Language-Team: Odin Design Themes\n"
@@ -126,22 +126,27 @@ msgctxt "(Admin Bar) Change Password Settings Page Link"
 msgid "Change Password"
 msgstr ""
 
-#: loader.php:256
+#: loader.php:254
+msgctxt "(Admin Bar) Email Settings Settings Page Link"
+msgid "Email Settings"
+msgstr ""
+
+#: loader.php:264
 msgctxt "(Admin Bar) Groups Settings Page Link"
 msgid "Groups"
 msgstr ""
 
-#: loader.php:264
+#: loader.php:272
 msgctxt "(Admin Bar) Manage Groups Settings Page Link"
 msgid "Manage Groups"
 msgstr ""
 
-#: loader.php:272
+#: loader.php:280
 msgctxt "(Admin Bar) Send Group Invitations Settings Page Link"
 msgid "Send Group Invitations"
 msgstr ""
 
-#: loader.php:280
+#: loader.php:288
 msgctxt "(Admin Bar) Received Group Invitations Settings Page Link"
 msgid "Received Group Invitations"
 msgstr ""

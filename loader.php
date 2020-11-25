@@ -247,6 +247,14 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     'href'    => trailingslashit($user_domain . 'settings/password')
   ]);
 
+  // Settings menu link
+  $wp_admin_bar->add_menu([
+    'parent'  => 'vikinger-settings-account',
+    'id'      => 'vikinger-settings-account-email',
+    'title'   => _x('Email Settings', '(Admin Bar) Email Settings Settings Page Link', 'vikinger-buddypress-extension'),
+    'href'    => trailingslashit($user_domain . 'settings/email-settings')
+  ]);
+
   // Only add groups related menu items if the BuddyPress groups component is active
   if (bp_is_active('groups')) {
     // Settings menu link
