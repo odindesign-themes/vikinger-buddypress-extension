@@ -288,6 +288,14 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
       'title'   => _x('Received Group Invitations', '(Admin Bar) Received Group Invitations Settings Page Link', 'vikinger-buddypress-extension'),
       'href'    => trailingslashit($user_domain . 'settings/received-group-invitations')
     ]);
+
+    // Settings menu link
+    $wp_admin_bar->add_menu([
+      'parent'  => 'vikinger-settings-groups',
+      'id'      => 'vikinger-settings-membership-requests',
+      'title'   => _x('Membership Requests', '(Admin Bar) Membership Requests Settings Page Link', 'vikinger-buddypress-extension'),
+      'href'    => trailingslashit($user_domain . 'settings/membership-requests')
+    ]);
   }
 }
 
