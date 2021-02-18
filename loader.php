@@ -1,6 +1,16 @@
 <?php
 
 /**
+ * Check if a members profile page is enabled
+ * 
+ * @param string $page      Page name.
+ * @return bool True if members profile about page is enabled, false otherwise.
+ */
+function vikinger_buddypress_extension_settings_members_profile_page_is_enabled($page) {
+  return get_theme_mod('vikinger_members_setting_profile_' . $page . '_page_status', 'enabled') === 'enabled';
+}
+
+/**
  * Add admin bar routes
  */
 function vikinger_buddypress_extension_admin_bar_add_routes() {
@@ -69,21 +79,25 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     'href'    => trailingslashit($user_domain . 'activity')
   ]);
 
-  // About submenu link
-  $wp_admin_bar->add_menu([
-    'parent'  => 'vikinger-profile',
-    'id'      => 'vikinger-profile-about',
-    'title'   => _x('About', '(Admin Bar) Profile Activity Page Link', 'vikinger-buddypress-extension'),
-    'href'    => trailingslashit($user_domain . 'about')
-  ]);
+  if (vikinger_buddypress_extension_settings_members_profile_page_is_enabled('about')) {
+    // About submenu link
+    $wp_admin_bar->add_menu([
+      'parent'  => 'vikinger-profile',
+      'id'      => 'vikinger-profile-about',
+      'title'   => _x('About', '(Admin Bar) Profile Activity Page Link', 'vikinger-buddypress-extension'),
+      'href'    => trailingslashit($user_domain . 'about')
+    ]);
+  }
 
-  // Timeline submenu link
-  $wp_admin_bar->add_menu([
-    'parent'  => 'vikinger-profile',
-    'id'      => 'vikinger-profile-timeline',
-    'title'   => _x('Timeline', '(Admin Bar) Profile Timeline Page Link', 'vikinger-buddypress-extension'),
-    'href'    => trailingslashit($user_domain . 'activity')
-  ]);
+  if (bp_is_active('activity')) {
+    // Timeline submenu link
+    $wp_admin_bar->add_menu([
+      'parent'  => 'vikinger-profile',
+      'id'      => 'vikinger-profile-timeline',
+      'title'   => _x('Timeline', '(Admin Bar) Profile Timeline Page Link', 'vikinger-buddypress-extension'),
+      'href'    => trailingslashit($user_domain . 'activity')
+    ]);
+  }
 
   // Only add friends related menu items if the BuddyPress friends component is active
   if (bp_is_active('friends')) {
@@ -107,16 +121,18 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     ]);
   }
 
-  // Blog submenu link
-  $wp_admin_bar->add_menu([
-    'parent'  => 'vikinger-profile',
-    'id'      => 'vikinger-profile-blog',
-    'title'   => _x('Blog', '(Admin Bar) Profile Blog Page Link', 'vikinger-buddypress-extension'),
-    'href'    => trailingslashit($user_domain . 'posts')
-  ]);
+  if (vikinger_buddypress_extension_settings_members_profile_page_is_enabled('posts')) {
+    // Blog submenu link
+    $wp_admin_bar->add_menu([
+      'parent'  => 'vikinger-profile',
+      'id'      => 'vikinger-profile-blog',
+      'title'   => _x('Blog', '(Admin Bar) Profile Blog Page Link', 'vikinger-buddypress-extension'),
+      'href'    => trailingslashit($user_domain . 'posts')
+    ]);
+  }
 
   // add vkmedia photos page navigation if plugin is active
-  if (function_exists('vkmedia_activate')) {
+  if (bp_is_active('activity') && function_exists('vkmedia_activate')) {
     // Photos submenu link
     $wp_admin_bar->add_menu([
       'parent'  => 'vikinger-profile',
@@ -128,37 +144,45 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
 
   // if GamiPress plugin is active, add points, badges, quests and ranks page navigation
   if (function_exists('GamiPress')) {
-    // Credits submenu link
-    $wp_admin_bar->add_menu([
-      'parent'  => 'vikinger-profile',
-      'id'      => 'vikinger-profile-credits',
-      'title'   => _x('Credits', '(Admin Bar) Profile Credits Page Link', 'vikinger-buddypress-extension'),
-      'href'    => trailingslashit($user_domain . 'credits')
-    ]);
+    if (vikinger_buddypress_extension_settings_members_profile_page_is_enabled('credits')) {
+      // Credits submenu link
+      $wp_admin_bar->add_menu([
+        'parent'  => 'vikinger-profile',
+        'id'      => 'vikinger-profile-credits',
+        'title'   => _x('Credits', '(Admin Bar) Profile Credits Page Link', 'vikinger-buddypress-extension'),
+        'href'    => trailingslashit($user_domain . 'credits')
+      ]);
+    }
 
-    // Badges submenu link
-    $wp_admin_bar->add_menu([
-      'parent'  => 'vikinger-profile',
-      'id'      => 'vikinger-profile-badges',
-      'title'   => _x('Badges', '(Admin Bar) Profile Badges Page Link', 'vikinger-buddypress-extension'),
-      'href'    => trailingslashit($user_domain . 'badges')
-    ]);
+    if (vikinger_buddypress_extension_settings_members_profile_page_is_enabled('badges')) {
+      // Badges submenu link
+      $wp_admin_bar->add_menu([
+        'parent'  => 'vikinger-profile',
+        'id'      => 'vikinger-profile-badges',
+        'title'   => _x('Badges', '(Admin Bar) Profile Badges Page Link', 'vikinger-buddypress-extension'),
+        'href'    => trailingslashit($user_domain . 'badges')
+      ]);
+    }
 
-    // Quests submenu link
-    $wp_admin_bar->add_menu([
-      'parent'  => 'vikinger-profile',
-      'id'      => 'vikinger-profile-quests',
-      'title'   => _x('Quests', '(Admin Bar) Profile Quests Page Link', 'vikinger-buddypress-extension'),
-      'href'    => trailingslashit($user_domain . 'quests')
-    ]);
+    if (vikinger_buddypress_extension_settings_members_profile_page_is_enabled('quests')) {
+      // Quests submenu link
+      $wp_admin_bar->add_menu([
+        'parent'  => 'vikinger-profile',
+        'id'      => 'vikinger-profile-quests',
+        'title'   => _x('Quests', '(Admin Bar) Profile Quests Page Link', 'vikinger-buddypress-extension'),
+        'href'    => trailingslashit($user_domain . 'quests')
+      ]);
+    }
 
-    // Rank submenu link
-    $wp_admin_bar->add_menu([
-      'parent'  => 'vikinger-profile',
-      'id'      => 'vikinger-profile-ranks',
-      'title'   => _x('Rank', '(Admin Bar) Profile Ranks Page Link', 'vikinger-buddypress-extension'),
-      'href'    => trailingslashit($user_domain . 'ranks')
-    ]);
+    if (vikinger_buddypress_extension_settings_members_profile_page_is_enabled('ranks')) {
+      // Rank submenu link
+      $wp_admin_bar->add_menu([
+        'parent'  => 'vikinger-profile',
+        'id'      => 'vikinger-profile-ranks',
+        'title'   => _x('Rank', '(Admin Bar) Profile Ranks Page Link', 'vikinger-buddypress-extension'),
+        'href'    => trailingslashit($user_domain . 'ranks')
+      ]);
+    }
   }
 
   // Settings menu link
@@ -237,6 +261,14 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
     'id'      => 'vikinger-settings-account-info',
     'title'   => _x('Account Info', '(Admin Bar) Account Info Settings Page Link', 'vikinger-buddypress-extension'),
     'href'    => trailingslashit($user_domain . 'settings/account')
+  ]);
+
+  // Settings menu link
+  $wp_admin_bar->add_menu([
+    'parent'  => 'vikinger-settings-account',
+    'id'      => 'vikinger-settings-account-settings',
+    'title'   => _x('Account Settings', '(Admin Bar) Account Settings Page Link', 'vikinger-buddypress-extension'),
+    'href'    => trailingslashit($user_domain . 'settings/account-settings')
   ]);
 
   // Settings menu link
