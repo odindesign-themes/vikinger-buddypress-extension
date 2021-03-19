@@ -11,6 +11,20 @@ function vikinger_buddypress_extension_settings_members_profile_page_is_enabled(
 }
 
 /**
+ * Check if file type upload is enabled
+ * 
+ * @return bool True if file type upload is enabled, false otherwise.
+ */
+function vikinger_buddypress_extension_settings_media_file_upload_is_enabled($file_type) {
+  $file_type_option = [
+    'image' => 'photo',
+    'video' => 'video'
+  ];
+
+  return get_theme_mod('vikinger_media_setting_' . $file_type_option[$file_type] . '_upload_status', 'enabled') === 'enabled';
+}
+
+/**
  * Add admin bar routes
  */
 function vikinger_buddypress_extension_admin_bar_add_routes() {
@@ -133,13 +147,25 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
 
   // add vkmedia photos page navigation if plugin is active
   if (bp_is_active('activity') && function_exists('vkmedia_activate')) {
-    // Photos submenu link
-    $wp_admin_bar->add_menu([
-      'parent'  => 'vikinger-profile',
-      'id'      => 'vikinger-profile-photos',
-      'title'   => _x('Photos', '(Admin Bar) Profile Photos Page Link', 'vikinger-buddypress-extension'),
-      'href'    => trailingslashit($user_domain . 'photos')
-    ]);
+    if (vikinger_buddypress_extension_settings_media_file_upload_is_enabled('image')) {
+      // Photos submenu link
+      $wp_admin_bar->add_menu([
+        'parent'  => 'vikinger-profile',
+        'id'      => 'vikinger-profile-photos',
+        'title'   => _x('Photos', '(Admin Bar) Profile Photos Page Link', 'vikinger-buddypress-extension'),
+        'href'    => trailingslashit($user_domain . 'photos')
+      ]);
+    }
+
+    if (vikinger_buddypress_extension_settings_media_file_upload_is_enabled('video')) {
+      // Videos submenu link
+      $wp_admin_bar->add_menu([
+        'parent'  => 'vikinger-profile',
+        'id'      => 'vikinger-profile-videos',
+        'title'   => _x('Videos', '(Admin Bar) Profile Videos Page Link', 'vikinger-buddypress-extension'),
+        'href'    => trailingslashit($user_domain . 'videos')
+      ]);
+    }
   }
 
   // if GamiPress plugin is active, add points, badges, quests and ranks page navigation
@@ -369,70 +395,74 @@ add_action('admin_bar_menu', 'vikinger_buddypress_extension_admin_bar_remove_unu
 /**
  * Only define extension if the buddypress groups component is active
  */
-if (bp_is_active('groups')) {
-  /**
-   * Group Photos Page
-   */
-  class Vikinger_Group_Photos_Extension extends BP_Group_Extension {
+if (bp_is_active('groups') && function_exists('vkmedia_activate')) {
+  if (vikinger_buddypress_extension_settings_media_file_upload_is_enabled('image')) {
     /**
-     * Your __construct() method will contain configuration options for 
-     * your extension, and will pass them to parent::init()
+     * Group Photos Page
      */
-    function __construct() {
-      $args = [
-        'slug' => 'photos',
-        'name' => 'Photos'
-      ];
+    class Vikinger_Group_Photos_Extension extends BP_Group_Extension {
+      /**
+       * Your __construct() method will contain configuration options for 
+       * your extension, and will pass them to parent::init()
+       */
+      function __construct() {
+        $args = [
+          'slug' => 'photos',
+          'name' => 'Photos'
+        ];
 
-      parent::init( $args );
-    }
- 
-    /**
-     * display() contains the markup that will be displayed on the main 
-     * plugin tab
-     */
-    function display($group_id = NULL) {
-      $group_id = bp_get_group_id();
+        parent::init( $args );
+      }
+  
+      /**
+       * display() contains the markup that will be displayed on the main 
+       * plugin tab
+       */
+      function display($group_id = NULL) {
+        $group_id = bp_get_group_id();
 
-    ?>
-      <div id="activity-photo-list" data-groupid=<?php echo esc_attr($group_id); ?>></div>
-    <?php
+      ?>
+        <div id="activity-photo-list" data-groupid=<?php echo esc_attr($group_id); ?>></div>
+      <?php
+      }
     }
+
+    bp_register_group_extension('Vikinger_Group_Photos_Extension');
   }
 
-  bp_register_group_extension('Vikinger_Group_Photos_Extension');
-
-  /**
-   * Group Videos Page
-   */
-  class Vikinger_Group_Videos_Extension extends BP_Group_Extension {
+  if (vikinger_buddypress_extension_settings_media_file_upload_is_enabled('video')) {
     /**
-     * Your __construct() method will contain configuration options for 
-     * your extension, and will pass them to parent::init()
+     * Group Videos Page
      */
-    function __construct() {
-      $args = [
-        'slug' => 'videos',
-        'name' => 'Videos'
-      ];
+    class Vikinger_Group_Videos_Extension extends BP_Group_Extension {
+      /**
+       * Your __construct() method will contain configuration options for 
+       * your extension, and will pass them to parent::init()
+       */
+      function __construct() {
+        $args = [
+          'slug' => 'videos',
+          'name' => 'Videos'
+        ];
 
-      parent::init( $args );
-    }
- 
-    /**
-     * display() contains the markup that will be displayed on the main 
-     * plugin tab
-     */
-    function display($group_id = NULL) {
-      $group_id = bp_get_group_id();
+        parent::init( $args );
+      }
+  
+      /**
+       * display() contains the markup that will be displayed on the main 
+       * plugin tab
+       */
+      function display($group_id = NULL) {
+        $group_id = bp_get_group_id();
 
-    ?>
-      <div id="activity-video-list" data-groupid=<?php echo esc_attr($group_id); ?>></div>
-    <?php
+      ?>
+        <div id="activity-video-list" data-groupid=<?php echo esc_attr($group_id); ?>></div>
+      <?php
+      }
     }
+
+    bp_register_group_extension('Vikinger_Group_Videos_Extension');
   }
-
-  bp_register_group_extension('Vikinger_Group_Videos_Extension');
 }
 
 ?>
