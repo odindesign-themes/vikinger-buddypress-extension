@@ -33,6 +33,8 @@ function vikinger_buddypress_extension_admin_bar_add_routes() {
   $user_domain = bp_loggedin_user_domain();
 
   $user = false;
+  
+  $user_id = 0;
 
   if (is_user_logged_in()) {
     $user_id = get_current_user_id();
